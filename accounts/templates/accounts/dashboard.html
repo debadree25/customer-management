@@ -1,0 +1,64 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+{% include 'accounts/status.html' %}
+<div class="row">
+    <div class="col-md-5">
+        <p class="display-4">Customers</h1>
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <table class="table table-sm table-bordered text-center table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Orders</th>
+                            <th scope="col">View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers  %}
+                        <tr scope="row">
+                            <th>{{customer}}</th>
+                            <th>{{customer.order_set.count}}</th>
+                            <th><a name="" id="" class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}" role="button">View</a></th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a name="" id="" class="btn btn-primary" href="{% url 'create_customer' %}" role="button">Create Customer</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <p class="display-4">Last 5 Orders</h1>
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <table class="table table-sm table-bordered text-center table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Date Ordered</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in last_5 %}
+                        <tr scope="row">
+                            <td>{{order.product.name}}</td>
+                            <td>{{order.date_created}}</td>
+                            <td>{{order.customer}}</td>
+                            <td>{{order.status}}</td>
+                            <td><a name="" id="" class="btn btn-sm btn-warning" href="{% url 'update_order' order.id %}" role="button">Update</a></td>
+                            <td><a name="" id="" class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}" role="button">Remove</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a name="" id="" class="btn btn-primary" href="{% url 'all_orders' %}" role="button">View All Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+<div class="col">
+        <p class="display-4">All Orders</h1>
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <table class="table table-sm table-bordered text-center table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Date Ordered</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr scope="row">
+                            <td>{{order.product.name}}</td>
+                            <td>{{order.date_created}}</td>
+                            <td>{{order.customer.name}}</td>
+                            <td>{{order.status}}</td>
+                            <td><a name="" id="" class="btn btn-sm btn-warning" href="{% url 'update_order' order.id %}" role="button">Update</a></td>
+                            <td><a name="" id="" class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}" role="button">Remove</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

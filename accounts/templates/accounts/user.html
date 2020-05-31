@@ -1,0 +1,94 @@
+{%  extends 'accounts/main.html' %}
+{% block content %}
+
+<br>
+
+<div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Welcome {{request.user.first_name}} !!</h1>
+            <p class="lead"></p>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white shadow-lg p-3 mb-5 rounded" id = "tc">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Orders Requested</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title"></h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white shadow-lg p-3 mb-5 rounded" id="total-orders">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Total Orders</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{orders.count}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white shadow-lg p-3 mb-5 rounded" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Orders Delivered</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{delivered}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white shadow-lg p-3 mb-5 rounded" id="orders-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Orders Pending</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{pending}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card shadow-sm p-3 mb-5 bg-white rounded">
+			<div class="card-body">
+                <table class="table table-sm table-bordered text-center table-hover">
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Date Orderd</th>
+                        <th>Status</th>
+                    </tr>
+					<tbody>
+						{% for order in orders %}
+						<tr scope="row">
+						<td>{{order.product}}</td>
+						<td>{{order.product.category}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.status}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+                </table>
+            </div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
